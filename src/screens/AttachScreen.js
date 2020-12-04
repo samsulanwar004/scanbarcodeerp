@@ -50,7 +50,7 @@ function AttachScreen({ navigation, route }) {
 					<Image 
 						source={{uri: additional.file_desc}} 
 						resizeMode="contain" 
-						style={{width: SCREEN_WIDTH - 10, height: SCREEN_HEIGHT}}
+						style={{width: SCREEN_WIDTH - 10, height: SCREEN_WIDTH}}
 					/>
 				}
 				{html && 
@@ -65,7 +65,7 @@ function AttachScreen({ navigation, route }) {
 		let sizes = additional.size;
 		let instruction = additional.instruction_cutting;
 
-		let sizeNumber = sizes[0].size;
+		let sizeNumber = sizes.length > 0 ? sizes[0].size : [];
 
 		let html = `
 			<div style="overflow: scroll;">
@@ -179,7 +179,7 @@ function AttachScreen({ navigation, route }) {
 					<Image 
 						source={{uri: additional.file_trimming}} 
 						resizeMode="contain" 
-						style={{width: SCREEN_WIDTH - 10, height: SCREEN_HEIGHT}}
+						style={styles.image}
 					/>
 				}
 				{html && 
@@ -199,7 +199,7 @@ function AttachScreen({ navigation, route }) {
 					<Image 
 						source={{uri: additional.file_bordir}} 
 						resizeMode="contain" 
-						style={{width: SCREEN_WIDTH - 10, height: SCREEN_HEIGHT}}
+						style={styles.image}
 					/>
 				}
 				{html && 
@@ -210,11 +210,45 @@ function AttachScreen({ navigation, route }) {
 	}
 
 	function renderSewing() {
+		let sewings = additional.sewing;
+
+		let html = `
+			<div style="overflow: scroll;">
+				<table border="1" style="width: ${SCREEN_HEIGHT}px;">
+				    <thead>
+				        <tr>
+				            <th style="vertical-align: middle; text-align: center;">No</th>
+				            <th style="vertical-align: middle; text-align: center;">Name</th>
+				            <th style="vertical-align: middle; text-align: center;">Description</th>
+				        </tr>
+				    </thead>
+				    <tbody>`;
+
+				    if (sewings.length > 0) {
+
+						for (var i = 0; i < sewings.length; i++) {
+						  	let detail = sewings[i];
+
+						  	html += `<tr>
+							    <td width="7%">${i+1}</td>
+							    <td>${detail.name}</td>
+							    <td>${detail.desc}</td>
+							</tr>
+							`;
+					    }
+					} else {
+						html += `<tr><td colspan="3">No data</td></tr>`;
+					}
+				        
+				        html += `<tr></tr>
+				    </tbody>
+				</table>
+			</div>
+			`;
+
 		return (
-			<View style={styles.containerAdditional}>
-				<Text>
-					Sewing
-				</Text>
+			<View style={styles.containerAdditionalTable}>
+				<HTML html={html} {...htmlConfig} />
 			</View>
 		)
 	}
@@ -228,7 +262,7 @@ function AttachScreen({ navigation, route }) {
 					<Image 
 						source={{uri: additional.file_finishing}} 
 						resizeMode="contain" 
-						style={{width: SCREEN_WIDTH - 10, height: SCREEN_HEIGHT}}
+						style={styles.image}
 					/>
 				}
 				{html &&
@@ -247,7 +281,7 @@ function AttachScreen({ navigation, route }) {
 					<Image 
 						source={{uri: additional.file_packing}} 
 						resizeMode="contain" 
-						style={{width: SCREEN_WIDTH - 10, height: SCREEN_HEIGHT}}
+						style={styles.image}
 					/>
 				}
 				{html &&
@@ -266,7 +300,7 @@ function AttachScreen({ navigation, route }) {
 					<Image 
 						source={{uri: additional.file_sample}} 
 						resizeMode="contain" 
-						style={{width: SCREEN_WIDTH - 10, height: SCREEN_HEIGHT}}
+						style={styles.image}
 					/>
 				}
 				{html &&
@@ -285,7 +319,7 @@ function AttachScreen({ navigation, route }) {
 					<Image 
 						source={{uri: additional.file_washing}} 
 						resizeMode="contain" 
-						style={{width: SCREEN_WIDTH - 10, height: SCREEN_HEIGHT}}
+						style={styles.image}
 					/>
 				}
 				{html &&
@@ -455,6 +489,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'column', 
 		padding: 10
+	},
+	image : {
+		width: SCREEN_WIDTH, 
+		height: SCREEN_WIDTH
 	}
 });
 

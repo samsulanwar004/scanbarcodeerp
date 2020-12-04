@@ -16,7 +16,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 Ionicons.loadFont();
 
 //lib
-import {formatDate, nowDate} from '../lib';
+import {formatDate, nowDate, convertToRupiah, round} from '../lib';
 
 //storage
 import {storageSet, storageGet} from '../storage';
@@ -65,8 +65,8 @@ function ProductScreen({ navigation, route }) {
 						    <td style="vertical-align: middle;">${detail.unit_code}</td>
 						    <td style="vertical-align: middle;">${detail.stock_bc_qty}</td>
 						    <td style="vertical-align: middle;">${detail.qty ?? 0}</td>
-						    <td style="vertical-align: middle;">${detail.price ?? 0}</td>
-						    <td style="vertical-align: middle;">${detail.amount ?? 0}</td>
+						    <td style="vertical-align: middle;">${convertToRupiah(round(detail.price ?? 0))}</td>
+						    <td style="vertical-align: middle;">${convertToRupiah(round(detail.amount ?? 0))}</td>
 						</tr>
 						`;
 					}

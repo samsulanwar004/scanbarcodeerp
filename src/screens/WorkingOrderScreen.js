@@ -12,7 +12,7 @@ Ionicons.loadFont();
 import {wo} from '../api/user';
 
 //lib
-import {formatDate, nowDate} from '../lib';
+import {formatDate, nowDate, convertToRupiah, round} from '../lib';
 
 //storage
 import {storageSet, storageGet} from '../storage';
@@ -59,7 +59,7 @@ function WorkingOrderScreen({ navigation, route }) {
 	    const {code, result} = await wo(accessToken, data);
 
 	    if (code === 200) {
-	    	setDataWo(result.data);console.log(result.data);
+	    	setDataWo(result.data);
 	      	setLoading(false);
 	      	//save to history
 	      	let oldHistory = await storageGet('history_barcode');
@@ -123,7 +123,7 @@ function WorkingOrderScreen({ navigation, route }) {
 				      <ListItem.Title>Notes</ListItem.Title>
 				    </ListItem.Content>
 				    <ListItem.Content>
-				      <ListItem.Title>{dataWo.note != null ? dataWo.note : '-'}</ListItem.Title>
+				      <ListItem.Title>{dataWo.note ?? '-'}</ListItem.Title>
 				    </ListItem.Content>
 				</ListItem>
 				<ListItem bottomDivider>
@@ -139,7 +139,7 @@ function WorkingOrderScreen({ navigation, route }) {
 				      <ListItem.Title>Brand</ListItem.Title>
 				    </ListItem.Content>
 				    <ListItem.Content>
-				      <ListItem.Title>{dataWo.brand_name != null ? dataWo.brand_name : '-'}</ListItem.Title>
+				      <ListItem.Title>{dataWo.brand_name ?? '-'}</ListItem.Title>
 				    </ListItem.Content>
 				</ListItem>
 				<ListItem bottomDivider>
@@ -155,7 +155,7 @@ function WorkingOrderScreen({ navigation, route }) {
 				      <ListItem.Title>Description of Goods</ListItem.Title>
 				    </ListItem.Content>
 				    <ListItem.Content>
-				      <ListItem.Title>{dataWo.desc_goods}</ListItem.Title>
+				      <ListItem.Title>{dataWo.desc_goods ?? '-'}</ListItem.Title>
 				    </ListItem.Content>
 				</ListItem>
 				<ListItem bottomDivider>
@@ -179,7 +179,7 @@ function WorkingOrderScreen({ navigation, route }) {
 				      <ListItem.Title>Price / pcs</ListItem.Title>
 				    </ListItem.Content>
 				    <ListItem.Content>
-				      <ListItem.Title>{dataWo.price_pcs}</ListItem.Title>
+				      <ListItem.Title>{convertToRupiah(round(dataWo.price_pcs ?? 0))}</ListItem.Title>
 				    </ListItem.Content>
 				</ListItem>
 				<ListItem bottomDivider>
@@ -187,7 +187,7 @@ function WorkingOrderScreen({ navigation, route }) {
 				      <ListItem.Title>Total Amount</ListItem.Title>
 				    </ListItem.Content>
 				    <ListItem.Content>
-				      <ListItem.Title>{dataWo.amount}</ListItem.Title>
+				      <ListItem.Title>{convertToRupiah(round(dataWo.amount ?? 0))}</ListItem.Title>
 				    </ListItem.Content>
 				</ListItem>
 				<View style={{position: 'absolute', top: SCREEN_WIDTH/2, width: SCREEN_WIDTH, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>

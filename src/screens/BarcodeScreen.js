@@ -33,6 +33,8 @@ function BarcodeScreen({ navigation, route }) {
 
     if (mode == 'wo') {
       title = 'WO Barcode';
+    } else if (mode == 'material') {
+      title = 'Material Barcode';
     }
 
     navigation.setOptions({
@@ -49,6 +51,8 @@ function BarcodeScreen({ navigation, route }) {
 
           if (mode == 'wo') {
             navigation.navigate('Working Order', {wo_reference: scanResult.data});
+          } else if (mode == 'material') {
+            navigation.navigate('Material', {barcodeid: scanResult.data});
           }
 	        
 	      }

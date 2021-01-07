@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { View, StyleSheet, Dimensions, TouchableOpacity, Image, StatusBar, FlatList} from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableOpacity, Image, StatusBar, FlatList, Alert} from 'react-native';
 import {Context} from '../context/Store';
 import { Button, ThemeProvider, Input, Text, Avatar, ListItem } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -124,6 +124,18 @@ function HomeScreen({ navigation, route }) {
 					</View>
 					<Text>
 						WO
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					activeOpacity={1} 
+					style={styles.menu}
+					onPress={() => navigation.navigate('Barcode', {mode: 'material'})}
+				>
+					<View style={{backgroundColor: '#219653', padding: 15, borderRadius: 50}}>
+						<Ionicons name="barcode-outline" size={24} color="#FFFFFF"/>
+					</View>
+					<Text>
+						Material
 					</Text>
 				</TouchableOpacity>
 			</View>

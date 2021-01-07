@@ -17,7 +17,7 @@ function ProfileScreen({ navigation }) {
 	async function getProfile() {
 		const {profile} = state.account;
 
-		setDataProfile(profile);
+		setDataProfile(profile ?? []);
 	}
 
 	useEffect(() => {

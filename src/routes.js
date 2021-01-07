@@ -20,6 +20,7 @@ import HistoryScreen from './screens/HistoryScreen';
 import AttachScreen from './screens/AttachScreen';
 import ProductScreen from './screens/ProductScreen';
 import PersonalScreen from './screens/PersonalScreen';
+import MaterialScreen from './screens/MaterialScreen';
 
 //tab button
 import TabBarcodeButton from './components/TabBarcodeButton';
@@ -118,6 +119,7 @@ function Route({ navigation }) {
           <Stack.Screen name="Attach" component={AttachScreen} options={{}}/>
           <Stack.Screen name="Product" component={ProductScreen} options={{}}/>
           <Stack.Screen name="Personal Information" component={PersonalScreen} options={{}}/>
+          <Stack.Screen name="Material" component={MaterialScreen} options={{}}/>
         </>
       )}
     </Stack.Navigator>

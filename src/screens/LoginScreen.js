@@ -70,8 +70,7 @@ function LoginScreen() {
 
     if (code === 200) {
       await storageSet('access_token', result.data.access_token);
-      await storageSet('expires_at', result.data.expires_at);
-      dispatch({ type: 'LOG_IN', token: result.data.access_token, expired: result.data.expires_at });
+      dispatch({ type: 'LOG_IN', token: result.data.access_token });
       setLoading(false);
     } else if (code === 422) {
       setError(result.errors)

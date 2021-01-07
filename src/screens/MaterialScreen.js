@@ -25,7 +25,7 @@ function MaterialScreen({ navigation, route }) {
 	const [loading, setLoading] = useState(false);
 	const [dataMaterial, setDataMaterial] = useState('');
 
-	const {barcodid} = route.params;
+	const {barcodeid} = route.params;
 
 	useEffect(() => {
 		getMaterial();
@@ -38,7 +38,7 @@ function MaterialScreen({ navigation, route }) {
 	    setLoading(true);
 
 	    let data = {
-	      barcodid: barcodid
+	      barcodeid: barcodeid
 	    }
 
 	    const {code, result} = await material(accessToken, data);
@@ -80,6 +80,94 @@ function MaterialScreen({ navigation, route }) {
 				    </ListItem.Content>
 				    <ListItem.Content>
 				      <ListItem.Title>{formatDate(new Date(dataMaterial.created_at))}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Product Name</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.product_name}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Type</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.type_name}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Group</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.group_name}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Unit</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.unit_code}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>QTY</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.qty}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Unit Price</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{convertToRupiah(round(dataMaterial.unit_price ?? 0))}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Amount</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{convertToRupiah(round(dataMaterial.amount ?? 0))}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>QC Date</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.qc_date}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>QC By</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.qc_by}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Inspection</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.inspection_report}</ListItem.Title>
+				    </ListItem.Content>
+				</ListItem>
+				<ListItem bottomDivider>
+				    <ListItem.Content>
+				      <ListItem.Title>Status</ListItem.Title>
+				    </ListItem.Content>
+				    <ListItem.Content>
+				      <ListItem.Title>{dataMaterial.status_name}</ListItem.Title>
 				    </ListItem.Content>
 				</ListItem>
 				<View style={{position: 'absolute', top: SCREEN_WIDTH/2, width: SCREEN_WIDTH, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
